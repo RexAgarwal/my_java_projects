@@ -1,16 +1,16 @@
 import java.util.Scanner;
 
 class CreditCard {
-    String name;
-    String cardNo;
-    boolean enabled;
-    int pin;
-    String expiryMonth;
-    String cardType; // (Platinum, Gold, Silver)
-    int currentCredit;
+   private String name;
+   private String cardNo;
+   private boolean enabled;
+   private int pin;
+   private String expiryMonth;
+   private String cardType; // (Platinum, Gold, Silver)
+   private int currentCredit;
     int creditLimit;
 
-    CreditCard(String ename, String ecardNo) {
+    protected CreditCard(String ename, String ecardNo) {
         name = ename;
         cardNo = ecardNo;
         enabled = true;
@@ -56,38 +56,42 @@ class CreditCard {
         
     }
 
-    void changePin(int newPin) {
+    protected void changePin(int newPin) {
         pin = newPin;
         System.out.println("Pin is successfully changed...");
 
     }
 
-    void display() {
+    protected  void display() {
         System.out.println(" Name:" + name + "\n Card number:" + cardNo + "\n Expiry Month:" + expiryMonth + "\n"
                 + " Card Type:" + cardType + "\n Credit limit:" + creditLimit);
     }
 
-    void changeCardStatus(boolean status) {
+    protected void changeCardStatus(boolean status) {
         enabled = status;
 
     }
 
-    void transact(int amt) {
+    protected void transact(int amt) {
         if (enabled) {
             Scanner sc = new Scanner(System.in); // System.in is a standard input stream.
             System.out.println("Please Enter your pin: ");
             int a = sc.nextInt();
             if (a == pin) {
+                int bill=0;
                 if (amt < creditLimit) {
                     if (cardType == "platinum") {
                         currentCredit -= amt * 0.97;
+                        bill = amt*0.97;
                     } else if (cardType == "gold") {
-                        currentCredit -= amt * 0.99;
-                    } else if (cardType == "silver") {
                         currentCredit -= amt * 0.98;
+                        bill = amt*0.98;
+                    } else if (cardType == "silver") {
+                        currentCredit -= amt * 0.99;
+                        bill = amt*0.99;
                     }
 
-                    System.out.println("Your transcation was successful.. \n you have made a transit of " + amt);
+                    System.out.println("Your transcation was successful.. \n you have made a transit of " + bill);
 
                 } else {
                     System.out.println("Credit Limit Exceeded....");
