@@ -15,6 +15,7 @@ class Employee {
         id = eid;
         dept = edept;
         basic = basicsal;
+        totalSalary = calculateSalary();
         if (dept == 1)
         allowance = 1500 ;
         else if(dept == 2)
@@ -34,7 +35,7 @@ class Employee {
                 + " Basic" + basic + "\n total Salary" + totalSalary);
     }
     protected boolean check_id(String uid){
-        if (id == uid)
+        if (id.equals(uid))
         return true;
         else 
         return false;
